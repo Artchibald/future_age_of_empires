@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="32" xmlns="http://www.w3.org/2000/svg">
+    <!-- Food Icon (Apple) -->
+    <g transform="translate(0, 0)">
+        <circle cx="16" cy="16" r="12" fill="#ff6b6b"/>
+        <path d="M16 4 L20 8 L12 8 Z" fill="#2ecc71"/>
+        <circle cx="12" cy="12" r="2" fill="#fff"/>
+    </g>
+
+    <!-- Wood Icon (Tree) -->
+    <g transform="translate(32, 0)">
+        <rect x="12" y="20" width="8" height="12" fill="#8b4513"/>
+        <path d="M16 4 L24 20 L8 20 Z" fill="#2ecc71"/>
+    </g>
+
+    <!-- Gold Icon (Coin) -->
+    <g transform="translate(64, 0)">
+        <circle cx="16" cy="16" r="12" fill="#f1c40f"/>
+        <circle cx="16" cy="16" r="10" fill="#f39c12"/>
+        <text x="16" y="20" font-size="12" text-anchor="middle" fill="#fff">$</text>
+    </g>
+
+    <!-- Stone Icon (Rock) -->
+    <g transform="translate(96, 0)">
+        <path d="M8 24 L16 8 L24 24 Z" fill="#95a5a6"/>
+        <path d="M12 20 L16 12 L20 20 Z" fill="#7f8c8d"/>
+    </g>
+</svg> 
