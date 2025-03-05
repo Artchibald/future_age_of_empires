@@ -7,7 +7,7 @@ export default class Demo extends Phaser.Scene {
     private resourceUI: any;
     private unitManager: any;
     private selectedUnit: string | null = null;
-    private grassTile!: Phaser.GameObjects.TileSprite;
+    private grassTile: Phaser.GameObjects.TileSprite | null = null;
 
     constructor() {
         super('demo');
@@ -24,6 +24,13 @@ export default class Demo extends Phaser.Scene {
 
         // Load essential assets first
         try {
+            // Determine the base URL based on the current environment
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const baseURL = isLocalhost ? '/' : '/projects/age_of_empires/';
+            
+            // Use baseURL for all asset loading
+            this.load.setBaseURL(baseURL);
+            
             this.load.image('grass_tile', 'assets/grass_tile.png');
             this.load.spritesheet('villager_sprites', 'assets/villager_sprites.png', {
                 frameWidth: 32,
@@ -107,10 +114,6 @@ export default class Demo extends Phaser.Scene {
         if (this.unitManager) {
             this.unitManager.update(time);
         }
-
-        // Scroll grass background
-        this.grassTile.tilePositionX += 0.1;
-        this.grassTile.tilePositionY += 0.1;
     }
 
     private handleClick(pointer: Phaser.Input.Pointer): void {

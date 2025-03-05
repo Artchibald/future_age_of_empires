@@ -1,13 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// Determine if we're in development or production
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 module.exports = {
     entry: './src/game.ts',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true,
-        publicPath: '/'
+        clean: false,
+        publicPath: isDevelopment ? '/' : '/projects/age_of_empires/'
     },
     module: {
         rules: [{
@@ -66,7 +69,11 @@ module.exports = {
         devMiddleware: {
             writeToDisk: true
         },
-        historyApiFallback: true,
+        historyApiFallback: {
+            rewrites: [
+                { from: /^\/projects\/age_of_empires\/.*$/, to: '/index.html' }
+            ]
+        },
         headers: {
             'Access-Control-Allow-Origin': '*'
         }

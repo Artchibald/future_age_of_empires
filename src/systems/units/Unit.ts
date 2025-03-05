@@ -73,7 +73,7 @@ export abstract class Unit {
     protected createSprite(): void {
         // Create sprite with the appropriate sprite sheet
         this.sprite = this.scene.add.sprite(this.x, this.y, 'villager_sprites', this.direction);
-        this.sprite.setScale(0.5);
+        this.sprite.setScale(1.0);
     }
 
     public moveTo(x: number, y: number): void {

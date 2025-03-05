@@ -23,7 +23,7 @@ export class Villager extends Unit {
         super(scene, x, y, UnitType.VILLAGER, resourceSystem, id);
     }
 
-    protected getBaseStats(): UnitStats {
+    protected getBaseStats(): UnitStats { 
         return {
             health: 25,
             maxHealth: 25,
