@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Villager Sprites</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #333;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid #666;
+            background: #000;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button id="downloadBtn">Download Sprite Sheet</button>
+    <canvas id="canvas" width="256" height="32"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Load the SVG file
+        fetch('src/assets/svg/villager.svg')
+            .then(response => response.text())
+            .then(svgContent => {
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
+                const svgElement = svgDoc.documentElement;
+
+                // Create an image from the SVG
+                const svgBlob = new Blob([svgContent], {type: 'image/svg+xml;charset=utf-8'});
+                const url = URL.createObjectURL(svgBlob);
+                const img = new Image();
+                img.onload = () => {
+                    // Clear canvas
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw villagers in 8 directions
+                    for (let i = 0; i < 8; i++) {
+                        ctx.save();
+                        ctx.translate(i * 32 + 16, 16);
+                        ctx.rotate(i * Math.PI / 4);
+                        ctx.translate(-16, -16);
+                        ctx.drawImage(img, 0, 0, 32, 32);
+                        ctx.restore();
+                    }
+                };
+                img.src = url;
+            })
+            .catch(error => {
+                console.error('Error loading SVG:', error);
+                alert('Error loading SVG file. Please check the console for details.');
+            });
+
+        // Download button handler
+        downloadBtn.onclick = () => {
+            const link = document.createElement('a');
+            link.download = 'villager_sprites.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        };
+    </script>
+</body>
+</html> 

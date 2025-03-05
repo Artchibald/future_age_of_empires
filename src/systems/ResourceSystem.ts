@@ -18,7 +18,7 @@ export class ResourceSystem {
         this.resources = new Map();
         this.resourceLimits = new Map();
         
-        // Initialize starting resources
+        // Initialize starting resources 
         this.initializeResources();
     }
 
